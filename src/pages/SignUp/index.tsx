@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Platform} from 'react-native';
 import {
   Background,
@@ -9,7 +9,11 @@ import {
   SubmitText,
 } from '../SignIn/style';
 
+import {AuthContext} from '../../contexts/auth';
+
 const SignUp: React.FC = () => {
+  const {user} = useContext(AuthContext);
+
   return (
     <Background>
       <Container

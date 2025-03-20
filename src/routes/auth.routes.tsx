@@ -4,8 +4,8 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
-import Signin from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import SignIn from '../pages/SignIn';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -14,7 +14,7 @@ const AuthRoutes: React.FC = () => {
     <AuthStack.Navigator>
       <AuthStack.Screen
         name="SignIn"
-        component={Signin}
+        component={SignIn}
         options={{
           headerShown: false,
         }}
@@ -25,11 +25,11 @@ const AuthRoutes: React.FC = () => {
         options={
           {
             headerStyle: {
-              backgroundColor: '#fff',
+              backgroundColor: '#000',
               borderBottomWidth: 1,
-              borderBottomColor: '#32cd32',
+              borderBottomColor: '#000',
             },
-            headerTintColor: '#000',
+            headerTintColor: '#fff',
             headerTitle: 'Voltar',
             headerBackTitleVisible: false,
           } as NativeStackNavigationOptions
