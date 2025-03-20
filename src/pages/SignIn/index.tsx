@@ -1,5 +1,6 @@
 import React from 'react';
-
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {Platform} from 'react-native';
 import {
   AreaInput,
   Background,
@@ -12,10 +13,19 @@ import {
   SubmitText,
 } from './style';
 
+type StackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
+
 const SignIn: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<StackParamList>>();
+
   return (
     <Background>
-      <Container>
+      <Container
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        enabled>
         <Logo source={require('../../assets/Logo1.png')} />
         <AreaInput>
           <Input
@@ -29,10 +39,10 @@ const SignIn: React.FC = () => {
             placeholderTextColor="#808080"
           />
         </AreaInput>
-        <SubmitButton onPress={() => console.log('Botão pressionado!')}>
+        <SubmitButton activeOpacity={0.8}>
           <SubmitText>Acessar</SubmitText>
         </SubmitButton>
-        <Link>
+        <Link onPress={() => navigation.navigate('SignUp')}>
           <LinkText>Criar uma conta!</LinkText>
         </Link>
       </Container>
