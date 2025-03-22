@@ -15,8 +15,8 @@ function App(): React.JSX.Element {
           backgroundColor={scheme === 'dark' ? '#000000' : '#FFFFFF'}
           barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
         />
+        <Routes />
       </AuthProvider>
-      <Routes />
     </NavigationContainer>
   );
 }

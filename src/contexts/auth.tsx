@@ -1,4 +1,7 @@
 import React, {createContext, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+
+import api from '../services/api';
 
 interface User {
   nome: String;
@@ -6,6 +9,7 @@ interface User {
 
 interface AuthContextData {
   user: User;
+  signUp: (nome: string, email: string, password: string) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -19,7 +23,30 @@ export const AuthContext = createContext<AuthContextData>(
 const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
   const [user, setUser] = useState<User>({nome: 'Caio teste'});
 
-  return <AuthContext.Provider value={{user}}>{children}</AuthContext.Provider>;
+  const navigation = useNavigation();
+
+  async function signUp(
+    nome: string,
+    email: string,
+    password: string,
+  ): Promise<void> {
+    try {
+      const response = await api.post('/users', {
+        name: nome,
+        email: email,
+        password: password,
+      });
+      navigation.goBack();
+    } catch (error) {
+      console.log('Erro ao cadastrar usuário!', error);
+    }
+  }
+
+  return (
+    <AuthContext.Provider value={{user, signUp}}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
