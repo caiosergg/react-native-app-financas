@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Platform} from 'react-native';
+import {Platform, ActivityIndicator, Alert} from 'react-native';
 import {
   Background,
   Container,
@@ -12,13 +12,17 @@ import {
 import {AuthContext} from '../../contexts/auth';
 
 export default function SignUp() {
-  const {signUp} = useContext(AuthContext);
+  const {signUp, loadingAuth} = useContext(AuthContext);
 
   const [nome, setNome] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   function handleSignUp() {
+    if (nome === '' || email === '' || password === '') {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
+      return;
+    }
     signUp(nome, email, password);
   }
 
@@ -54,7 +58,11 @@ export default function SignUp() {
           />
         </AreaInput>
         <SubmitButton onPress={handleSignUp}>
-          <SubmitText>Cadastrar</SubmitText>
+          {loadingAuth ? (
+            <ActivityIndicator size={20} color="#fff" />
+          ) : (
+            <SubmitText>Cadastrar</SubmitText>
+          )}
         </SubmitButton>
       </Container>
     </Background>
