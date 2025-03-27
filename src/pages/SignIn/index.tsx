@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {Platform} from 'react-native';
+import {Platform, ActivityIndicator} from 'react-native';
 import {
   AreaInput,
   Background,
@@ -13,13 +13,22 @@ import {
   SubmitText,
 } from './style';
 
+import {AuthContext} from '../../contexts/auth';
+
 type StackParamList = {
   SignIn: undefined;
   SignUp: undefined;
 };
 
-const SignIn: React.FC = () => {
+export default function SignIn() {
   const navigation = useNavigation<NavigationProp<StackParamList>>();
+  const {signIn, loadingAuth} = useContext(AuthContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleLogin() {
+    signIn(email, password);
+  }
 
   return (
     <Background>
@@ -30,17 +39,24 @@ const SignIn: React.FC = () => {
         <AreaInput>
           <Input
             placeholder="Seu email"
-            keyboardType="email-address"
             placeholderTextColor="#808080"
+            value={email}
+            onChangeText={text => setEmail(text)}
           />
           <Input
             placeholder="Sua senha"
             secureTextEntry={true}
             placeholderTextColor="#808080"
+            value={password}
+            onChangeText={text => setPassword(text)}
           />
         </AreaInput>
-        <SubmitButton activeOpacity={0.8}>
-          <SubmitText>Acessar</SubmitText>
+        <SubmitButton activeOpacity={0.8} onPress={handleLogin}>
+          {loadingAuth ? (
+            <ActivityIndicator size="small" color="#FFF" />
+          ) : (
+            <SubmitText>Acessar</SubmitText>
+          )}
         </SubmitButton>
         <Link onPress={() => navigation.navigate('SignUp')}>
           <LinkText>Criar uma conta!</LinkText>
@@ -48,6 +64,4 @@ const SignIn: React.FC = () => {
       </Container>
     </Background>
   );
-};
-
-export default SignIn;
+}
