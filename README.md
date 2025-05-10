@@ -1,4 +1,4 @@
-````markdown
+
 # App de Finanças Pessoais 💸
 
 Aplicativo de finanças pessoais desenvolvido com React Native e TypeScript.  
@@ -22,10 +22,11 @@ Baseado no curso de Matheus Fraga, com customizações pessoais.
 ## 🚀 Como executar
 
 1. Clone o repositório:
+   
    ```bash
    git clone https://github.com/caiosergg/react-native-app-financas.git
-````
-
+   ```
+   
 2. Instale as dependências:
 
    ```bash
