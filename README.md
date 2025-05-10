@@ -1,97 +1,74 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+Ótimo! Aqui está um modelo completo de README.md para o seu projeto de finanças pessoais em React Native:
 
-# Getting Started
+---
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+````markdown
+# App de Finanças Pessoais 💸
 
-## Step 1: Start Metro
+Aplicativo de finanças pessoais desenvolvido com React Native e TypeScript.  
+Utiliza AsyncStorage para persistência local e possui layout próprio.  
+Permite gerenciar transações e saldo, com funcionalidades futuras planejadas.  
+Baseado no curso de Matheus Fraga, com customizações pessoais.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## ✨ Funcionalidades
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- Registro de entradas e saídas financeiras
+- Cálculo automático de saldo
+- Persistência de dados com AsyncStorage
+- Layout customizado
 
-```sh
-# Using npm
-npm start
+## 🧱 Tecnologias
 
-# OR using Yarn
-yarn start
+- [React Native](https://reactnative.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
+
+## 📱 Prévia
+
+*(Adicione aqui prints ou um GIF mostrando o app em funcionamento)*
+
+## 🚀 Como executar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/react-native-app-financas.git
+````
+
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   # ou
+   yarn install
+   ```
+
+3. Execute o app:
+
+   ```bash
+   npx react-native run-android
+   # ou
+   npx react-native run-ios
+   ```
+
+> Certifique-se de ter o ambiente React Native configurado: [Guia oficial](https://reactnative.dev/docs/environment-setup)
+
+## 📌 Roadmap (em breve)
+
+* Tela de gráficos
+* Filtros por categoria/data
+* Exportação de dados
+* Suporte a múltiplas carteiras
+
+## 🧑‍💻 Autor
+
+Desenvolvido por Caio Sérgio (https://github.com/caiosergg)
+Projeto baseado no curso [React Native - Matheus Fraga (Udemy)](https://www.udemy.com/course/react-native-do-zero-ao-avancado/)
+
+---
+
 ```
 
-## Step 2: Build and run your app
+Se quiser, posso adicionar um badge de status, licença ou algo mais específico.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+Deseja que eu inclua um exemplo de imagem (preview) ou instruções para colocar um GIF do app no README?
 ```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
