@@ -1,4 +1,5 @@
 import React, {createContext, useState} from 'react';
+import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import api from '../services/api';
@@ -40,33 +41,15 @@ const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
     try {
       const response = await api.post('/users', {
         name: nome,
-        email: email,
         password: password,
+        email: email,
       });
       setLoadingAuth(false);
-      navigation.goBack();
-    } catch (error) {
-      console.log('Erro ao cadastrar usuário!', error);
-      setLoadingAuth(false);
-    }
-  }
 
-  async function signUp(
-    nome: string,
-    email: string,
-    password: string,
-  ): Promise<void> {
-    setLoadingAuth(true);
-    try {
-      const response = await api.post('/users', {
-        name: nome,
-        email: email,
-        password: password,
-      });
-      setLoadingAuth(false);
       navigation.goBack();
+      Alert.alert('Sucesso', 'Cadastro realizado com sucesso!');
     } catch (error) {
-      console.log('Erro ao cadastrar usuário!', error);
+      Alert.alert('Erro ao cadastrar usuário!', 'Tente novamente.');
       setLoadingAuth(false);
     }
   }
@@ -94,10 +77,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
         name,
         email,
       });
+
       setLoadingAuth(false);
     } catch (error) {
-      console.log('Erro ao logar usuário!', error);
-      //setLoadingAuth(false);
+      Alert.alert('Erro ao logar usuário!', 'Tente novamente.');
+      setLoadingAuth(false);
     }
   }
 
