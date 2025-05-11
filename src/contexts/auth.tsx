@@ -1,6 +1,8 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useState, useEffect} from 'react';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../services/api';
 
@@ -16,6 +18,7 @@ interface AuthContextData {
   signUp: (nome: string, email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   loadingAuth: boolean;
+  loading: boolean;
 }
 
 interface AuthProviderProps {
@@ -29,8 +32,34 @@ export const AuthContext = createContext<AuthContextData>(
 const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    async function loadStorage() {
+      const storageUser = await AsyncStorage.getItem('@finToken');
+      if (storageUser) {
+        try {
+          const response = await api.get('/me', {
+            headers: {
+              Authorization: `Bearer ${storageUser}`,
+            },
+          });
+
+          if (response && response.data) {
+            api.defaults.headers.Authorization = `Bearer ${storageUser}`;
+            setUser(response.data);
+            setLoading(false);
+          }
+        } catch (error) {
+          setUser(null);
+        }
+      }
+      setLoading(false);
+    }
+    loadStorage();
+  }, []);
 
   async function signUp(
     nome: string,
@@ -70,6 +99,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
         email,
       };
 
+      await AsyncStorage.setItem('@finToken', token);
+
       api.defaults.headers.Authorization = `Bearer ${token}`;
 
       setUser({
@@ -87,7 +118,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
 
   return (
     <AuthContext.Provider
-      value={{signed: !!user, user, signUp, signIn, loadingAuth}}>
+      value={{signed: !!user, user, signUp, signIn, loadingAuth, loading}}>
       {children}
     </AuthContext.Provider>
   );
