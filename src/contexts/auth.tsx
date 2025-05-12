@@ -19,6 +19,7 @@ interface AuthContextData {
   signIn: (email: string, password: string) => Promise<void>;
   loadingAuth: boolean;
   loading: boolean;
+  signOut: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -116,9 +117,23 @@ const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
     }
   }
 
+  async function signOut() {
+    await AsyncStorage.clear().then(() => {
+      setUser(null);
+    });
+  }
+
   return (
     <AuthContext.Provider
-      value={{signed: !!user, user, signUp, signIn, loadingAuth, loading}}>
+      value={{
+        signed: !!user,
+        user,
+        signUp,
+        signIn,
+        signOut,
+        loadingAuth,
+        loading,
+      }}>
       {children}
     </AuthContext.Provider>
   );
